@@ -17,10 +17,14 @@ class AuthController extends Controller
         $user = User::create($fields);
         $token = $user->createToken($request->name)->plainTextToken;
 
-        return [
+        $data = [
             'user' => $user,
             'token' => $token
         ];
+
+        return response()->json($data, 201);
+
+
     }
 
     public function login(Request $request) {
@@ -32,10 +36,12 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
         $token = $user->createToken($user->name)->plainTextToken;
 
-        return [
+        $data = [
             'user' => $user,
             'token' => $token
         ];
+
+        return response()->json($data, 201);
     }
 
     public function logout() {

@@ -4,7 +4,12 @@ function App() {
 
   const api = axios.create({
     baseURL: 'http://127.0.0.1:8000/',
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    }
   })
+  
 
   const register = async () => {
 
@@ -38,6 +43,21 @@ function App() {
 
   }
 
+  const fetchUsers = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const res = await api.get('api/users', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      console.log(res.data);
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
+
   return (
     <div>
       <button className="bg-blue-500 cursor-pointer m-2 p-2 rounded-sm" onClick={register}>
@@ -45,6 +65,9 @@ function App() {
       </button>
       <button className="bg-green-500 cursor-pointer m-2 p-2 rounded-sm" onClick={login}>
           login
+      </button>
+      <button className="bg-orange-500 cursor-pointer m-2 p-2 rounded-sm" onClick={fetchUsers}>
+          fetch users
       </button>
     </div>
   )
