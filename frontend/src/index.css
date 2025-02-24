@@ -6,6 +6,31 @@
     body {
         font-family: "Poppins", sans-serif;
     }
+    a {
+        display: inline-block !important;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 }
+
+@theme {
+    --breakpoint-low: 420px;
+    --breakpoint-ml: 840px;
+
+    --animate-slide: slide 1s ease-in-out;
+
+    @keyframes slide {
+        0% {
+            top: -100%;
+        }
+        100% {
+            top: 72px;
+        }
+    }
+}
+
 
 
