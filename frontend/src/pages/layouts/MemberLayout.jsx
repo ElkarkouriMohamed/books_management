@@ -16,7 +16,7 @@ export default function MemberLayout() {
         <div
           className={`absolute ${
             open ? `top-[64px] opacity-100` : `top-[-100%] opacity-0`
-          } ml:opacity-100 left-0 ml:static w-full ml:w-auto transition-all duration-700 max-ml:py-8 bg-[#f9f9f9] ml:bg-white flex flex-col ml:flex-row items-center gap-4 ml:gap-4.5`}
+          } ml:opacity-100 left-0 ml:static w-full ml:w-auto transition-all duration-700 max-ml:py-8 bg-white flex flex-col ml:flex-row items-center gap-4 ml:gap-4.5`}
         >
           <Link
             to="/books"
@@ -50,7 +50,7 @@ export default function MemberLayout() {
           <motion.span
             className="w-8 h-[3px] bg-slate-800 rounded-lg"
             animate={{ opacity: open ? 0 : 1 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
           ></motion.span>
           <motion.span
             className="w-8 h-[3px] bg-slate-800 rounded-lg"

@@ -1,12 +1,17 @@
 import { Link, Outlet } from "react-router-dom";
 import Logout from "./Logout";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function AdminLayout() {
-  const { name } = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
+  const { name } = user;
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    console.log('user:', user);
+  }, [user])
 
   return (
     <>
@@ -17,7 +22,7 @@ export default function AdminLayout() {
         <div
           className={`absolute ${
             open ? `top-[64px] opacity-100` : `top-[-100%] opacity-0`
-          } ml:opacity-100 left-0 ml:static w-full ml:w-auto transition-all duration-700 max-ml:py-8 bg-[#f9f9f9] ml:bg-white flex flex-col ml:flex-row items-center gap-4 ml:gap-4.5 lg:gap-8`}
+          } lg:opacity-100 left-0 lg:static w-full lg:w-auto transition-all duration-700 max-lg:py-8 bg-[#eee] lg:bg-white flex flex-col lg:flex-row items-center gap-6 lg:gap-4.5 xl:gap-8`}
         >
           <Link
             to="/dashboard"
@@ -30,6 +35,12 @@ export default function AdminLayout() {
             className="text-lg hover:text-slate-400 transition-colors duration-200"
           >
             Users
+          </Link>
+          <Link
+            to="/borrowings-validate"
+            className="text-lg hover:text-slate-400 transition-colors duration-200"
+          >
+            Borrowings
           </Link>
           <Link
             to="/categories"
@@ -47,7 +58,7 @@ export default function AdminLayout() {
         </div>
         <button
           onClick={() => setOpen(!open)}
-          className="ml:hidden cursor-pointer flex flex-col gap-1.5"
+          className="lg:hidden cursor-pointer flex flex-col gap-1.5"
         >
           <motion.span
             className="w-8 h-[3px] bg-slate-800 rounded-lg"

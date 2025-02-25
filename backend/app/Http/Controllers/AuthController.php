@@ -36,11 +36,9 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return [
-                'errors' => [
-                    'email' => 'incorrect email or password'
-                ]
-            ];
+            return response()->json(['errors' => [
+                "email" => ['email or password incorrect']
+            ]], 400);
         }
 
         $token = $user->createToken($user->name, [$user->role])->plainTextToken;

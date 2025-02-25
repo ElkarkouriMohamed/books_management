@@ -14,10 +14,15 @@
         padding: 0;
         box-sizing: border-box;
     }
+    .home {
+        background-image: url('./asset/images/library_lg.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }
 
 @theme {
-    --breakpoint-low: 420px;
+    --breakpoint-low: 470px;
     --breakpoint-ml: 840px;
 
     --animate-slide: slide 1s ease-in-out;
@@ -31,6 +36,8 @@
         }
     }
 }
+
+
 
 
 
