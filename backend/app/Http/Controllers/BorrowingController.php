@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 
 class BorrowingController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -70,38 +71,38 @@ class BorrowingController extends Controller
      */
     public function update(Request $request, Borrowing $borrowing)
     {
-        Gate::authorize('update',$borrowing);
+        // Gate::authorize('update',$borrowing);
 
-        $fields = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'book_id' => 'required|exists:books,id',
-            'due_date' => 'required|date|after:today'
-        ]);
+        // $fields = $request->validate([
+        //     'user_id' => 'required|exists:users,id',
+        //     'book_id' => 'required|exists:books,id',
+        //     'due_date' => 'required|date|after:today'
+        // ]);
 
-        if ($borrowing->book_id !== $fields['book_id']) {
-            $newBook = Book::find($fields['book_id']);
-            if ($newBook->copies_available <= 0) {
-                return response()->json([
-                    'message' => 'This new book is currently unavailable for borrowing.'
-                ], 400);
-            }
-        }
+        // if ($borrowing->book_id !== $fields['book_id']) {
+        //     $newBook = Book::find($fields['book_id']);
+        //     if ($newBook->copies_available <= 0) {
+        //         return response()->json([
+        //             'message' => 'This new book is currently unavailable for borrowing.'
+        //         ], 400);
+        //     }
+        // }
 
-        if ($borrowing->book_id !== $fields['book_id']){
-            $oldbook = Book::find($borrowing->book_id);
-            $oldbook->increment('copies_available');
-        }
+        // if ($borrowing->book_id !== $fields['book_id']){
+        //     $oldbook = Book::find($borrowing->book_id);
+        //     $oldbook->increment('copies_available');
+        // }
 
-        if ($borrowing->book_id !== $fields['book_id']){
-            $newBook->decrement('copies_available');
-        }
+        // if ($borrowing->book_id !== $fields['book_id']){
+        //     $newBook->decrement('copies_available');
+        // }
 
-        $borrowing->update($fields);
+        // $borrowing->update($fields);
 
-        return response()->json([
-            'borrowing' => $borrowing,
-            'message' => 'The borrowed book has updated Successfully'
-        ]);
+        // return response()->json([
+        //     'borrowing' => $borrowing,
+        //     'message' => 'The borrowed book has updated Successfully'
+        // ]);
     }
 
     /**

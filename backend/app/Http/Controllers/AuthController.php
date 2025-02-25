@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -12,6 +13,7 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required',
+            'role' => 'nullable|in:admin,member'
         ]);
 
         $user = User::create($fields);
@@ -34,6 +36,13 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::Check($request->password, $user->password)) {
+            return response()->json([
+                'errors' => ['email or password incorrect']
+            ]);
+        }
+
         $token = $user->createToken($user->name)->plainTextToken;
 
         $data = [
@@ -41,7 +50,7 @@ class AuthController extends Controller
             'token' => $token
         ];
 
-        return response()->json($data, 201);
+        return response()->json($data, 200);
     }
 
     public function logout(Request $request) {
