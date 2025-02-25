@@ -1,75 +1,24 @@
-import axios from "axios"
+import { useSelector } from 'react-redux';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Header from './pages/layouts/Header';
+import Books from './pages/Books';
+import Login from './pages/auth/Login';
+import Home from './pages/Home';
+import Register from './pages/auth/Register';
 
 function App() {
-
-  const api = axios.create({
-    baseURL: 'http://127.0.0.1:8000/',
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json"
-    }
-  })
-  
-
-  const register = async () => {
-
-    try {
-      const res = await api.post('api/register', {
-        "name": "mariam",
-        "email": "mariam@gmail.com",
-        "password": "4444"
-      });
-
-      localStorage.setItem('token', res.data.token);
-      console.log(res.data);
-    } catch (err) {
-      console.log(err)
-    }
-
-  }
-
-  const login = async () => {
-
-    try {
-      const res = await api.post('api/login', {
-        "email": "simo@gmail.com",
-        "password": "4444"
-      });
-      localStorage.setItem('token', res.data.token);
-      console.log(res.data);
-    } catch (err) {
-      console.log(err)
-    }
-
-  }
-
-  const fetchUsers = async () => {
-    const token = localStorage.getItem('token');
-    try {
-      const res = await api.get('api/users', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      console.log(res.data);
-    } catch (err) {
-      console.log(err)
-    }
-
-  }
-
+  const user = useSelector(state => state.auth.user);
   return (
-    <div>
-      <button className="bg-blue-500 cursor-pointer m-2 p-2 rounded-sm" onClick={register}>
-          register
-      </button>
-      <button className="bg-green-500 cursor-pointer m-2 p-2 rounded-sm" onClick={login}>
-          login
-      </button>
-      <button className="bg-orange-500 cursor-pointer m-2 p-2 rounded-sm" onClick={fetchUsers}>
-          fetch users
-      </button>
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Header />}>
+            <Route index element={<Home />} />
+            <Route path='/books' element={<Books />} />
+            <Route path='/login' element={user ? <Navigate to='/'/> : <Login />} />
+            <Route path='/register' element={user ? <Navigate to='/'/> : <Register />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
   )
 }
 

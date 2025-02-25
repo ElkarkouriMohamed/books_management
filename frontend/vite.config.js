@@ -8,4 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  // server: {
+  //   host: '192.168.100.3' // This allows external connections
+  // }
 })

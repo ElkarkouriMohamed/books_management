@@ -17,7 +17,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::create($fields);
-        $token = $user->createToken($request->name)->plainTextToken;
+        $token = $user->createToken($request->name, [$request->role])->plainTextToken;
 
         $data = [
             'user' => $user,
@@ -25,8 +25,6 @@ class AuthController extends Controller
         ];
 
         return response()->json($data, 201);
-
-
     }
 
     public function login(Request $request) {
@@ -45,6 +43,10 @@ class AuthController extends Controller
 
         $token = $user->createToken($user->name)->plainTextToken;
 
+
+        
+
+        $token = $user->createToken($user->name, [$user->role])->plainTextToken;
         $data = [
             'user' => $user,
             'token' => $token
@@ -58,5 +60,19 @@ class AuthController extends Controller
         $request->user()->tokens()->delete();
 
         return response()->json(['message' => 'You are logged out']);
+
     }
+
 }
+
+
+
+
+
+
+    // public function edit(Request $request) {
+    //     if ($request->user()->tokenCan('admin')) {
+    //         return 'this user is an admin!';
+    //     }
+    //     return 'It is a member';
+    // }

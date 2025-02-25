@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class BookController extends Controller
 {
     
@@ -25,6 +26,7 @@ class BookController extends Controller
         return response()->json([
             'books' => $books
         ]);
+
     }
 
     /**
