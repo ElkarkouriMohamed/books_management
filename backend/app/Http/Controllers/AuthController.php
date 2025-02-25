@@ -35,6 +35,15 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
+        if (!$user || !Hash::Check($request->password, $user->password)) {
+            return response()->json([
+                'errors' => ['email or password incorrect']
+            ]);
+        }
+
+        $token = $user->createToken($user->name)->plainTextToken;
+
+
         
 
         $token = $user->createToken($user->name, [$user->role])->plainTextToken;
@@ -46,8 +55,11 @@ class AuthController extends Controller
         return response()->json($data, 200);
     }
 
-    public function logout(Request $request)
-    {
+    public function logout(Request $request) {
+
+        $request->user()->tokens()->delete();
+
+        return response()->json(['message' => 'You are logged out']);
 
     }
 
