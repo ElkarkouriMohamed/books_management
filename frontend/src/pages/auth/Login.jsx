@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import email from "../../asset/icons/email.svg";
 import lock from "../../asset/icons/lock.svg";
+import { motion } from "framer-motion";
 
 
 export default function Login() {
@@ -14,8 +15,8 @@ export default function Login() {
     const handleLogin = async () => {
         try {
             const res = await api.post('api/login', {
-                "email": "simol@gmail.com",
-                "password": "44445"
+                "email": "simo@gmail.com",
+                "password": "4444"
             });
             const data = res.data;
             dispatch(setUser(data.user));
@@ -29,9 +30,13 @@ export default function Login() {
 
     return (
         <div className="low:bg-gray-400 w-full h-[calc(100vh-64px)] flex items-center justify-center">
-            <div className="w-fit bg-[#eee] p-6 flex flex-col gap-4 items-center rounded-3xl">
-                <div className="text-4xl font-semibold">Login</div>
-                <div className="flex flex-col gap-4">
+            <motion.div className="w-fit bg-[#eee] p-6 flex flex-col gap-4 rounded-3xl"
+                initial={{ scale:.8 }}
+                animate={{ scale:1 }}
+                transition={{ duration: .4 }}
+            >
+                <div className="text-4xl font-semibold text-center">Login</div>
+                <div className="flex flex-col gap-4 w-[340px]">
                     <div className="flex flex-col gap-2 rounded-2xl">
                         <label>Email</label>
                         <div className="flex items-center gap-2 ps-3 bg-white rounded-md">
@@ -51,10 +56,10 @@ export default function Login() {
                     <button className="cursor-pointer p-3 bg-fuchsia-800 hover:bg-fuchsia-700 transition-colors duration-200 text-white text-lg font-semibold rounded-xl" onClick={handleLogin}>Login</button>
                 </div>
                 <div className="flex flex-col items-center">
-                    <span className="text-slate-400">Don't have an Account? </span>
+                    <span className="text-slate-400">Don&apos;t have an Account? </span>
                     <Link to='/register' className="underline font-semibold text-fuchsia-700 hover:text-fuchsia-600 transition-colors duration-200">Create Account</Link>
                 </div>
-            </div>
+            </motion.div>
         </div>
     )
 }

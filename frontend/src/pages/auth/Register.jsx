@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import email from "../../asset/icons/email.svg";
 import lock from "../../asset/icons/lock.svg";
 import user from "../../asset/icons/user.svg";
+import { motion } from "framer-motion";
 
 export default function Register() {
     const dispatch = useDispatch();
@@ -30,9 +31,13 @@ export default function Register() {
     }
     return (
         <div className="bg-[#eee] low:bg-gray-400 h-[calc(100vh-64px)] low:flex low:items-center low:justify-center">
-            <div className="low:w-auto bg-[#eee] p-2 low:p-6 flex flex-col items-center gap-4 low:rounded-3xl">
+            <motion.div className="low:w-auto bg-[#eee] p-2 low:p-6 flex flex-col items-center gap-4 low:rounded-3xl shadow-2xl"
+                initial={{ scale:.8 }}
+                animate={{ scale:1 }}
+                transition={{ duration: .4 }}
+            >
                 <div className="text-4xl font-semibold">Login</div>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 w-[360px]">
                     <div className="flex flex-col gap-2 rounded-2xl">
                         <label>Your Name</label>
                         <div className="flex items-center gap-2 ps-3 bg-white rounded-md">
@@ -63,7 +68,7 @@ export default function Register() {
                     <span className="text-slate-400">Already Have an Account? </span>
                     <Link to='/login' className="underline font-semibold text-fuchsia-700 hover:text-fuchsia-600 transition-colors duration-200">Login to Account</Link>
                 </div>
-            </div>
+            </motion.div>
         </div>
     )
 }

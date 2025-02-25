@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Category;
+use App\Models\Review;
 use App\Models\Borrowing;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,5 +28,9 @@ class Book extends Model
 
     public function borrowings() {
         return $this->hasMany(Borrowing::class);
+    }
+
+    public function reviews() {
+        return $this->hasMany(Review::class);
     }
 }

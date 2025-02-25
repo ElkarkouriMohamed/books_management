@@ -35,11 +35,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['errors' => [
-                "email" => ['email or password incorrect']
-            ]], 400);
-        }
+        
 
         $token = $user->createToken($user->name, [$user->role])->plainTextToken;
         $data = [
@@ -52,17 +48,19 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete(); // Delete all tokens
 
-        return response()->json([
-            'message' => 'Logged out successfully'
-        ]);
     }
 
-    public function edit(Request $request) {
-        if ($request->user()->tokenCan('admin')) {
-            return 'this user is an admin!';
-        }
-        return 'It is a member';
-    }
 }
+
+
+
+
+
+
+    // public function edit(Request $request) {
+    //     if ($request->user()->tokenCan('admin')) {
+    //         return 'this user is an admin!';
+    //     }
+    //     return 'It is a member';
+    // }

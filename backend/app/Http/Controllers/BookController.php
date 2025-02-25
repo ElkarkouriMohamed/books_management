@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
 class BookController extends Controller
 {
@@ -14,13 +10,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
-        return $books;
+
     }
 
     public function create(Request $request, Book $book) {
-        Gate::authorize('create', $book);
-        return 'done';
+
     }
 
     /**
