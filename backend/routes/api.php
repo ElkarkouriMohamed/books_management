@@ -8,6 +8,12 @@ use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
+
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');;
 
 Route::get('/users', [UserController::class, 'index'])->middleware('auth:sanctum');
 // Books Api Route:
@@ -24,6 +30,7 @@ Route::patch('/borrowings/{borrowing}/validate',[BorrowingController::class,'val
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/books', [BookController::class, 'index']);
 
 

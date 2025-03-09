@@ -19,6 +19,13 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
+    @media screen and (min-width: 420px) {
+        .auth {
+            background-image: url('./asset/images/background_2.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    }
 }
 
 @theme {

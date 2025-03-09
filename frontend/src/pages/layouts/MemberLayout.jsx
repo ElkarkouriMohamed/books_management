@@ -10,27 +10,31 @@ export default function MemberLayout() {
   return (
     <>
       <header className="w-full flex justify-between items-center p-4 lg:px-5">
-        <Link to="/" className="text-2xl">
+        <Link to="/" className="text-2xl" onClick={() => setOpen(false)}
+        >
           Books Management
         </Link>
         <div
           className={`absolute ${
             open ? `top-[64px] opacity-100` : `top-[-100%] opacity-0`
-          } ml:opacity-100 left-0 ml:static w-full ml:w-auto transition-all duration-700 max-ml:py-8 bg-white flex flex-col ml:flex-row items-center gap-4 ml:gap-4.5`}
+          } ml:opacity-100 left-0 ml:static w-full ml:w-auto transition-all duration-700 max-ml:py-8 bg-white flex flex-col ml:flex-row items-center gap-4 ml:gap-4.5 z-10`}
         >
           <Link
+            onClick={() => setOpen(false)}
             to="/books"
             className="text-lg hover:text-slate-400 transition-colors duration-200"
           >
             Books
           </Link>
           <Link
+            onClick={() => setOpen(false)}
             to="/borrowings"
             className="text-lg hover:text-slate-400 transition-colors duration-200"
           >
             My Borrowings
           </Link>
           <Link
+            onClick={() => setOpen(false)}
             to="/profile"
             className="bg-amber-300 hover:bg-amber-200 transition-colors duration-200 px-4 py-1.5 rounded-3xl text-lg"
           >

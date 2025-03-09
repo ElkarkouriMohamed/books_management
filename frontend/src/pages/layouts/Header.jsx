@@ -21,6 +21,7 @@ export default function Header() {
         });
         dispatch(setUser(res.data));
       } catch (err) {
+        console.log(err);
         localStorage.removeItem("token");
         dispatch(setUser(null));
         dispatch(setToken(null));

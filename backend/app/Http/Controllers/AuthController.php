@@ -17,7 +17,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::create($fields);
-        $token = $user->createToken($request->name, [$request->role])->plainTextToken;
+        $token = $user->createToken($request->name, ['member'])->plainTextToken;
 
         $data = [
             'user' => $user,
@@ -37,14 +37,9 @@ class AuthController extends Controller
 
         if (!$user || !Hash::Check($request->password, $user->password)) {
             return response()->json([
-                'errors' => ['email or password incorrect']
-            ]);
+                'errors' => [ 'email' => ['email or password incorrect'] ]
+            ], 400);
         }
-
-        $token = $user->createToken($user->name)->plainTextToken;
-
-
-        
 
         $token = $user->createToken($user->name, [$user->role])->plainTextToken;
         $data = [
@@ -59,7 +54,7 @@ class AuthController extends Controller
 
         $request->user()->tokens()->delete();
 
-        return response()->json(['message' => 'You are logged out']);
+        return response()->json(['message' => 'You are logged out'], 200);
 
     }
 

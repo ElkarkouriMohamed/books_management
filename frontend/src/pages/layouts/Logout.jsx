@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { api } from "../../api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setToken, setUser } from "../../features/auth/authSlice";
 
 export default function Logout() {
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
@@ -21,6 +22,8 @@ export default function Logout() {
       localStorage.removeItem("token");
       dispatch(setUser(null));
       dispatch(setToken(null));
+      navigate('/login');
+
     } catch (err) {
       console.log(err.code);
     }
@@ -28,7 +31,7 @@ export default function Logout() {
 
   return (
     <Link
-      onClick={handleLogout}
+      onClick={() => handleLogout()}
       className="border-2 border-red-400 hover:bg-red-400 text-red-400 hover:text-white px-3 py-1.5 rounded-3xl transition-colors duration-200"
     >
       Logout

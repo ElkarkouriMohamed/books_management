@@ -8,29 +8,32 @@ export default function GuestLayout() {
   return (
     <>
       <header className="w-full flex justify-between items-center p-4 lg:px-5">
-        <Link to="/" className="text-2xl">
+        <Link to="/" className="text-2xl" onClick={() => setOpen(false)}>
           Books Management
         </Link>
         <div
           className={`absolute ${
             open ? `top-[64px] opacity-100` : `top-[-100%] opacity-0`
-          } ml:opacity-100 left-0 ml:static w-full ml:w-auto transition-all duration-700 max-ml:py-8 bg-[#f9f9f9] ml:bg-white flex flex-col ml:flex-row items-center gap-4 ml:gap-4.5`}
+          } ml:opacity-100 left-0 ml:static w-full ml:w-auto transition-all duration-700 max-ml:py-8 bg-[#f9f9f9] ml:bg-white flex flex-col ml:flex-row items-center gap-4 ml:gap-4.5 z-10`}
         >
           <Link
             to="/about"
             className="text-lg hover:text-slate-400 transition-colors duration-200"
+            onClick={() => setOpen(false)}
           >
             About
           </Link>
           <Link
             to="/contact"
             className="text-lg hover:text-slate-400 transition-colors duration-200"
+            onClick={() => setOpen(false)}
           >
             Contact
           </Link>
           <Link
             to="/login"
             className="text-lg hover:text-slate-400 transition-colors duration-200"
+            onClick={() => setOpen(false)}
           >
             Login
           </Link>
