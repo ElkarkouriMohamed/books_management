@@ -20,13 +20,10 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $books = Book::all();
-        return response()->json([
-            'books' => $books
-        ]);
-
+    public function index(Request $request)
+    {  
+        $limit = $_GET['limit'] ?? 10;
+        return response()->json([Book::paginate($limit)], 200);
     }
 
     /**

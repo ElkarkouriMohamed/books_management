@@ -4,7 +4,7 @@ return [
     'paths' => ['*'],
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:5173', 'http://192.168.100.3:5173', 'http://192.168.1.73:5173'],
+    'allowed_origins' => ['http://localhost:5173', 'http://localhost:5174', 'http://192.168.100.3:5173', 'http://192.168.1.73:5173'],
 
     'allowed_origins_patterns' => [],
 

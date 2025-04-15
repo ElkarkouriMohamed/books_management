@@ -12,29 +12,34 @@ export default function Header() {
   const dispatch = useDispatch();
 
   const fetchUser = async () => {
-    if (token) {
-      try {
-        const res = await api.get("api/user", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        dispatch(setUser(res.data));
-      } catch (err) {
-        console.log(err);
-        localStorage.removeItem("token");
-        dispatch(setUser(null));
-        dispatch(setToken(null));
-      }
+    try {
+      const res = await api.get("api/user", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch(setUser(res.data));
+    } catch (err) {
+      console.log(err);
+      localStorage.removeItem("token");
+      dispatch(setUser(null));
+      dispatch(setToken(null));
     }
   };
 
   useEffect(() => {
-    fetchUser();
-  }, [token]);
+    if (token) {
+      fetchUser();
+      console.log('fetch user')
+    }
 
-  if (user?.role === "admin") return <AdminLayout />;
-  if (user?.role === "member") return <MemberLayout />;
+  }, []);
+  useEffect(() => {
+    console.log('user:', user)
+  }, [user]);
+
+  //if (user?.role === "admin") return <AdminLayout />;
+  if (user) return <MemberLayout />;
 
   return <GuestLayout />;
 }

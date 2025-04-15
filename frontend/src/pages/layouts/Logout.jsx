@@ -23,7 +23,6 @@ export default function Logout() {
       dispatch(setUser(null));
       dispatch(setToken(null));
       navigate('/login');
-
     } catch (err) {
       console.log(err.code);
     }

@@ -25,7 +25,7 @@ export default function Login() {
       dispatch(setUser(data.user));
       dispatch(setToken(data.token));
       localStorage.setItem("token", data.token);
-      console.log(data);
+      navigate('/');
     } catch (err) {
       setErrors(err.response.data.errors);
     }
